@@ -1,0 +1,18 @@
+{
+    "name": "Baseline",
+    "description": "The first Test Run test module",
+    "tests": [
+        {
+            "id": "baseline.compliant",
+            "name": "Compliant",
+            "description": "This test will always be compliant",
+            "category": "baseline"
+        },
+        {
+            "id": "baseline.non-compliant",
+            "name": "Non-Compliant",
+            "description": "This test will always be non-compliant",
+            "category": "baseline"
+        }
+    ]
+}

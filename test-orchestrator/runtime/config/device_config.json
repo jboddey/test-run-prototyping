@@ -1,0 +1,13 @@
+{
+    "id": "tridium_jace_8000",
+    "make": "Tridium",
+    "model": "JACE-8000",
+    "serial_no": "123456789",
+    "firmware": "Niagara 4.12",
+    "network": {
+        "mac_address": "07:4e:3e:ce:12:f7",
+        "ipv4_address": "10.0.0.35",
+        "ipv6_address": "2001:1234:a:b:7207:12ff:fe34:5678",
+        "net_mask": "255.255.255.0"
+    }
+}
