@@ -1,9 +1,10 @@
 # Image name: test-run/baseline
 
-# This will eventually be a lightweight base image
-FROM ubuntu:jammy
+FROM test-run/base
 
 RUN apt-get update
+
+COPY test_baseline test_baseline
 
 RUN chmod u+x test_baseline
 

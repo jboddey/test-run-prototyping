@@ -1,6 +1,7 @@
 {
     "name": "Baseline",
     "description": "The first Test Run test module",
+    "build_file": "baseline.Dockerfile",
     "tests": [
         {
             "id": "baseline.compliant",

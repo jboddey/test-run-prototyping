@@ -1,4 +1,4 @@
 {
-    "device_intf": "",
-    "internet_intf": ""
+    "device_intf": "enx00e04c01137b",
+    "internet_intf": "wlo1"
 }

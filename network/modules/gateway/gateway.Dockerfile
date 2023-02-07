@@ -4,7 +4,7 @@ FROM test-run/base:latest
 # Install dnsmasq
 RUN apt-get install -y iptables
 
-COPY network/modules/gateway/start_gateway start_gateway
+COPY start_gateway start_gateway
 
 RUN chmod u+x start_gateway
 

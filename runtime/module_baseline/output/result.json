@@ -1,0 +1,14 @@
+{
+    "results": [
+        {
+            "id": "baseline.compliant",
+            "result": "compliant",
+            "description": "The device is definitely compliant"
+        },
+        {
+            "id": "baseline.non-compliant",
+            "result": "non-compliant",
+            "description": "The device is definitely non-compliant"
+        }
+    ]
+}

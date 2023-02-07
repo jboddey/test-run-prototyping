@@ -1,0 +1,3 @@
+Inspecting device for compliantness...
+
+Yup, device seems compliant.

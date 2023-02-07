@@ -21,7 +21,7 @@ class TestRun:
         # Get network ready (via Network orchestrator)
         LOGGER.info("Network is ready. Waiting for device information...")
 
-        time.sleep(20)
+        time.sleep(100)
 
         # This method would be called by the service worker (need to make it static?)
         self.test_device()

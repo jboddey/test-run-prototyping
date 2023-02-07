@@ -1,3 +1,13 @@
 #!/bin/bash -e
 
+sleep 5
+
 echo Do something
+
+sleep 5
+
+echo Do something else
+
+sleep 5
+
+echo Do it again!
