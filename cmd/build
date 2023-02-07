@@ -1,0 +1,29 @@
+#!/bin/bash -e
+
+ROOT=$(dirname $0)/..
+cd $ROOT
+
+build_dir=network/modules
+build_root=build
+
+rm -rf $build_root
+mkdir -p $build_root
+
+function build_module() {
+    name=$1
+    build_file=$2
+    log_file=$build_root/$name.log
+    tag=test-run/$name
+    echo Build $build_file into $tag, log to $log_file...
+    docker build -t $tag -f $build_file . > $log_file
+}
+
+# Build network containers
+for build_file in $build_dir/*; do
+    module=${build_file##*/}
+    docker_file=$build_file/$module.Dockerfile
+    build_module $module $docker_file
+done
+
+echo Done with docker build
+exit 0

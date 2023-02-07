@@ -1,0 +1,28 @@
+#!/bin/bash
+
+EXT_INTF=eth0
+LOCAL_INTF=eth1
+
+echo Starting gateway
+
+# Wait for external interface to be created
+while ! ip link show $EXT_INTF; do
+    echo $EXT_INTF is not yet ready. Waiting 5 seconds
+    sleep 5
+done
+
+# Wait for local interface to be ready
+while ! ip link show $LOCAL_INTF; do
+    sleep 5
+done
+
+# Enable NAT to the outside world
+echo 1 > /proc/sys/net/ipv4/ip_forward
+iptables -t nat -A POSTROUTING -o $EXT_INTF -j MASQUERADE
+iptables -A FORWARD -i $EXT_INTF -o $LOCAL_INTF -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -i $LOCAL_INTF -o $EXT_INTF -j ACCEPT
+
+# Keep gateway running until killed by framework
+while true; do
+    sleep 10
+done

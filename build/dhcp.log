@@ -1,0 +1,17 @@
+Sending build context to Docker daemon  17.23MB
+Step 1/5 : FROM test-run/base:latest
+ ---> bf35bb210e75
+Step 2/5 : RUN apt-get install -y dnsmasq iptables
+ ---> Using cache
+ ---> a7dc8c273e79
+Step 3/5 : COPY network/modules/dhcp/start_dhcp start_dhcp
+ ---> Using cache
+ ---> 04cabf3fd453
+Step 4/5 : RUN chmod u+x start_dhcp
+ ---> Using cache
+ ---> 66baea32282e
+Step 5/5 : ENTRYPOINT [ "./start_dhcp" ]
+ ---> Using cache
+ ---> 742f348babe6
+Successfully built 742f348babe6
+Successfully tagged test-run/dhcp:latest

@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+service DHCP {
+
+    rpc GetDHCPRange(GetDHCPRangeRequest) returns (DHCPRange) {};
+
+    rpc SetDHCPRange(DHCPRange) returns (Response) {};
+
+    rpc GetIPAddress(GetIPAddressRequest) returns (Response) {};
+
+    rpc SetLeaseAddress(SetLeaseAddressRequest) returns (Response) {};
+
+}
+
+message Response {
+    int32 code = 1;
+    string message = 2;
+}
+
+message DHCPRange {
+    string start = 1;
+    string end = 2;
+}
+
+message GetDHCPRangeRequest {
+
+}
+
+message GetIPAddressRequest {
+
+}
+
+message SetLeaseAddressRequest {
+    string ipAddress = 1;
+}

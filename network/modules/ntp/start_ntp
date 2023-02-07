@@ -1,0 +1,45 @@
+#!/bin/bash
+
+CONFIG_FILE=/etc/dnsmasq.conf
+PID_FILE=/var/run/dnsmasq.pid
+INTF=eth0
+
+echo Starting networking
+
+# Wait for local interface to be ready
+while ! ip link show $LOCAL_INTF; do
+    echo $INTF is not yet ready. Waiting 5 seconds
+    sleep 5
+done
+
+# Restart dnsmasq when config changes
+while true; do
+
+    new_checksum=$(md5sum $CONFIG_FILE)
+
+    if [ "$checksum" == "$new_checksum" ]; then
+        sleep 2
+        continue
+    fi
+
+    echo Config changed. Restarting dnsmasq at $(date)..
+
+    if [ -f $PID_FILE ]; then
+        kill -9 $(cat $PID_FILE) || true
+        rm -f $PID_FILE
+    fi
+
+    checksum=$new_checksum
+
+    echo Starting dnsmasq at $(date)
+
+    dnsmasq --log-facility=/var/log/dnsmasq.log &
+
+    while [ ! -f $PID_FILE ]; do
+        echo Waiting for $PID_FILE...
+        sleep 2
+    done
+
+    echo $PID_FILE now available
+
+done

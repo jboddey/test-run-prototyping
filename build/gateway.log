@@ -1,0 +1,18 @@
+Sending build context to Docker daemon  17.23MB
+Step 1/5 : FROM test-run/base:latest
+ ---> bf35bb210e75
+Step 2/5 : RUN apt-get install -y iptables
+ ---> Using cache
+ ---> 50a9eef98548
+Step 3/5 : COPY network/modules/gateway/start_gateway start_gateway
+ ---> 212bc48d5218
+Step 4/5 : RUN chmod u+x start_gateway
+ ---> Running in 51b3d1212a43
+Removing intermediate container 51b3d1212a43
+ ---> f0dd96dde1c6
+Step 5/5 : ENTRYPOINT ["./start_gateway"]
+ ---> Running in ca591c75c337
+Removing intermediate container ca591c75c337
+ ---> 3709af0b3221
+Successfully built 3709af0b3221
+Successfully tagged test-run/gateway:latest

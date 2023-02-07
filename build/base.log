@@ -1,0 +1,8 @@
+Sending build context to Docker daemon  17.23MB
+Step 1/2 : FROM ubuntu:jammy
+ ---> 6b7dfa7e8fdb
+Step 2/2 : RUN apt-get update && apt-get install -y net-tools iputils-ping tcpdump iproute2 jq python3
+ ---> Using cache
+ ---> bf35bb210e75
+Successfully built bf35bb210e75
+Successfully tagged test-run/base:latest
