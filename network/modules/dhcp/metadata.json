@@ -1,0 +1,9 @@
+{
+    "name": "DHCP",
+    "description": "Primary DHCP server with IPv6 SLAAC",
+    "network": {
+        "enable_wan": false,
+        "ip_index": 2
+    }
+    
+}

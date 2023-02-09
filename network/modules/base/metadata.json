@@ -1,0 +1,5 @@
+{
+    "name": "Base",
+    "description": "Base image",
+    "enable_container": false
+}

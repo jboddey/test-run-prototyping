@@ -1,0 +1,9 @@
+{
+    "name": "NTP",
+    "description": "An NTPv4 server",
+    "network": {
+        "enable_wan": false,
+        "ip_index": 5
+    }
+    
+}

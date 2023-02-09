@@ -1,0 +1,9 @@
+{
+    "name": "DNS",
+    "description": "A DNS server",
+    "network": {
+        "enable_wan": false,
+        "ip_index": 4
+    }
+    
+}

@@ -1,0 +1,8 @@
+{
+    "name": "Gateway",
+    "description": "Enable internet connectivity on device bridge",
+    "network": {
+        "enable_wan": true,
+        "ip_index": 1
+    }
+}

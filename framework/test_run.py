@@ -12,6 +12,9 @@ LOGGER = logger.get_logger('test_run')
 class TestRun:
 
     def __init__(self):
+
+        signal.signal(signal.SIGINT, self.handler)
+
         LOGGER.info("Starting Test Run")
 
         # Get all components ready
@@ -21,7 +24,8 @@ class TestRun:
         # Get network ready (via Network orchestrator)
         LOGGER.info("Network is ready. Waiting for device information...")
 
-        time.sleep(100)
+        # TODO: This time should be configurable (How long to hold before exiting, this could be infinite too)
+        time.sleep(300)
 
         # This method would be called by the service worker (need to make it static?)
         self.test_device()
@@ -36,10 +40,10 @@ class TestRun:
         # Run test modules against device
         self._test_orchestrator.run_tests()
 
-def handler(signum, frame):
-    if (signum == 2):
-        exit(1)
-
-signal.signal(signal.SIGINT, handler)
+    def handler(self, signum, frame):
+        if (signum == 2):
+            LOGGER.info("Exit signal received. Restoring network...")
+            self._net_orchestrator.restore_net()
+            exit(1)
 
 test_run = TestRun()

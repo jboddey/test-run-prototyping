@@ -1,9 +1,15 @@
 #!/bin/bash
 
-EXT_INTF=eth0
-LOCAL_INTF=eth1
+LOCAL_INTF=eth0
+EXT_INTF=eth1
 
 echo Starting gateway
+
+# Wait for local interface to be ready
+while ! ip link show $LOCAL_INTF; do
+    echo $LOCAL_INTF is not yet ready. Waiting 5 seconds
+    sleep 5
+done
 
 # Wait for external interface to be created
 while ! ip link show $EXT_INTF; do
@@ -11,16 +17,19 @@ while ! ip link show $EXT_INTF; do
     sleep 5
 done
 
-# Wait for local interface to be ready
-while ! ip link show $LOCAL_INTF; do
-    sleep 5
-done
+# Start dhclient if external interface does not have IP
+if ! ip addr show $EXT_INTF | fgrep 'inet '; then
+    echo No inet address for $EXT_INTF, initiating dhcp...
+    dhclient $EXT_INTF
+fi
 
 # Enable NAT to the outside world
 echo 1 > /proc/sys/net/ipv4/ip_forward
 iptables -t nat -A POSTROUTING -o $EXT_INTF -j MASQUERADE
 iptables -A FORWARD -i $EXT_INTF -o $LOCAL_INTF -m state --state RELATED,ESTABLISHED -j ACCEPT
 iptables -A FORWARD -i $LOCAL_INTF -o $EXT_INTF -j ACCEPT
+
+# Need to enable a packet capture of the gateway and save to /runtime/output/network/gateway.pcap
 
 # Keep gateway running until killed by framework
 while true; do
